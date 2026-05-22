@@ -139,7 +139,7 @@ async function handleSubmit() {
       );
     }
 
-    const parts = ["¡Gracias por seguir siendo parte!"];
+    const parts = ["¡Gracias por seguir siendo parte de esta comunidad que transforma realidades!"];
     successMessage.value = parts.join(" ");
   } catch (error) {
     errorMessage.value =
@@ -167,14 +167,16 @@ onMounted(load);
 
     <form v-else class="space-y-5" @submit.prevent="handleSubmit">
       <header class="space-y-1.5">
+        <!-- Logo: reemplazar src con el logo de la organización -->
+        <img src="" alt="Logo" class="h-10 w-auto" />
         <h1 class="text-lg font-semibold text-foreground sm:text-xl">
           Actualizá tu donación
         </h1>
         <p class="text-sm leading-relaxed text-foreground">
-          Es una alegría que estés acá. Tu decisión de actualizar tus datos nos permite seguir trabajando por nuestra misión.
+          ¡Qué bueno que sigas acá! Tu compromiso hace posible que sigamos construyendo viviendas para que nadie en Argentina viva en un piso de tierra. Tu apoyo es clave, ¡reactivemos tu donación!
         </p>
         <p class="text-sm leading-relaxed text-foreground">
-          Si hoy tenés la posibilidad de aumentar tu donación, nos ayudás a escalar nuestro trabajo.
+          Si hoy tenés la posibilidad de aumentar tu donación, nos ayudas a escalar nuestro trabajo.
         </p>
       </header>
 
@@ -205,8 +207,8 @@ onMounted(load);
         v-model="payment"
         :required="false"
         :disabled="isSubmitting || !canSavePaymentMethod"
-        title="Actualizá tu medio de pago"
-        description="Si cambiaste de tarjeta o preferís adherir un CBU, podés completar los datos acá abajo. Si solo querés modificar el monto de tu donación, no hace falta completar esta parte."
+        title="Actualiza tu medio de pago"
+        description="Si cambiaste de tarjeta o preferís adherir un CBU, completá los datos abajo. Si tu tarjeta es la misma y solo modificaste el monto, podés saltear este paso."
       />
 
       <p v-if="errorMessage" class="text-sm text-red-600" role="alert">
@@ -224,7 +226,7 @@ onMounted(load);
         :disabled="isSubmitting"
         class="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60"
       >
-        {{ isSubmitting ? "Guardando..." : "Guardar cambios" }}
+        {{ isSubmitting ? "Guardando..." : "Reactivar mi compromiso" }}
       </button>
     </form>
   </main>
