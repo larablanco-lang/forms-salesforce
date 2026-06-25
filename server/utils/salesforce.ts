@@ -2,13 +2,28 @@ import { Connection } from "jsforce";
 import type { DebiPaymentToken } from "~/composables/useDebiClient";
 
 /**
- * Consumer Key of Debi's `Debi_Forms_Onboarding` Connected App. The app is a
- * public client with PKCE — there's no Consumer Secret, so this value is
- * safe to commit. Refresh tokens minted by the central onboarding helper are
- * bound to this client_id, which is why the runtime hardcodes it.
+ * Consumer Keys of Debi's `Debi_Forms_Onboarding` Connected Apps. Production
+ * and sandbox orgs are served by different Connected Apps with different
+ * Consumer Keys, so the runtime selects one based on `SF_LOGIN_URL`. Both
+ * apps are public PKCE clients — there's no Consumer Secret, so these values
+ * are safe to commit. Refresh tokens minted by the central onboarding helper
+ * are bound to the matching client_id.
  */
-const SF_CLIENT_ID =
-  "3MVG9rZjd7MXFdLiKsRvnOTkvFUjxpzFwIuGUncX31f4kO7SnP0FvS1Ewo_kGUR.MMiJgLqPOTgKGfGm9GpLk";
+const SF_PRODUCTION_CLIENT_ID =
+  "AD898414272299ABA60B82474BE4577A4A7B22A55C29F398833B7709AAF3CCAE";
+
+const SF_SANDBOX_CLIENT_ID =
+  "9D7C0072554A7E46CBF60F0AFC843A36F5F045DAEE1108961A12C72226179649";
+
+const SANDBOX_LOGIN_URL = "https://test.salesforce.com";
+
+/** Picks the Connected App Consumer Key matching the org's login host. */
+function clientIdForLoginUrl(loginUrl: string): string {
+  return loginUrl.trim().toLowerCase().startsWith(SANDBOX_LOGIN_URL)
+    ? SF_SANDBOX_CLIENT_ID
+    : SF_PRODUCTION_CLIENT_ID;
+}
+
 
 // Default field map for NPSP-style orgs. If your Salesforce instance uses
 // non-standard API names for the recurring donation amount, the payment
@@ -156,7 +171,7 @@ async function openConnection(): Promise<Connection> {
   // client_secret is ever needed.
   const refreshParams: Record<string, string> = {
     grant_type: "refresh_token",
-    client_id: SF_CLIENT_ID,
+    client_id: clientIdForLoginUrl(loginUrl),
     refresh_token: refreshToken,
   };
 
