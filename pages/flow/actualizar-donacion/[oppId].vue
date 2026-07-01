@@ -167,8 +167,9 @@ onMounted(load);
 
     <form v-else class="space-y-5" @submit.prevent="handleSubmit">
       <header class="space-y-1.5">
-        <!-- Logo: reemplazar src con el logo de la organización -->
-        <img src="" alt="Logo" class="h-10 w-auto" />
+        <div class="mb-3 flex justify-end">
+          <img src="/logos/techo.svg" alt="TECHO" class="h-10 w-auto" />
+        </div>
         <h1 class="text-lg font-semibold text-foreground sm:text-xl">
           Actualizá tu donación
         </h1>

@@ -168,6 +168,8 @@ async function onSubmit() {
     <FlowHeader
       title="Sumate como donante"
       description="Tu donación nos permite seguir trabajando por nuestra misión. Este es un ejemplo con 3 pasos y monto como dropdown."
+      logo="/logos/techo.svg"
+      logo-alt="TECHO"
     />
 
     <div

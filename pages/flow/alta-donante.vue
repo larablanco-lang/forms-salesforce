@@ -175,6 +175,8 @@ async function onSubmit() {
     <FlowHeader
       title="Sumate como donante"
       description="Tu donación nos permite seguir trabajando por nuestra misión. Completá el formulario para sumarte."
+      logo="/logos/techo.svg"
+      logo-alt="TECHO"
     />
 
     <div

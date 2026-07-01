@@ -58,12 +58,13 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <header class="mb-5 space-y-1.5">
-    <img
-      v-if="logo"
-      :src="logo"
-      :alt="logoAlt"
-      :class="['mb-3 max-w-[200px] object-contain', logoClass]"
-    />
+    <div v-if="logo" class="mb-3 flex justify-end">
+      <img
+        :src="logo"
+        :alt="logoAlt"
+        :class="['max-w-[200px] object-contain', logoClass]"
+      />
+    </div>
     <h1 class="text-lg font-semibold text-foreground sm:text-xl">
       {{ title }}
     </h1>
